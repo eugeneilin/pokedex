@@ -1,0 +1,27 @@
+@import 'bootstrap/dist/css/bootstrap.min.css';
+
+body {
+  font-family: 'Titillium Web', sans-serif;
+  color: var(--bs-gray-300);
+}
+
+.card#search:hover {
+  transform: scale(1);
+  box-shadow: inherit;
+}
+
+.card {
+  transition: all 0.1s ease-in-out;
+  background: var(--bs-gray-300);
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.form-control:focus,
+.form-control:active {
+  outline: none;
+  box-shadow: none;
+}
