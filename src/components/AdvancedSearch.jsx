@@ -1,7 +1,15 @@
 import React from 'react';
 import { Card, Form, Row, Col } from 'react-bootstrap';
 
-const AdvancedSearch = ({ pokemonData, search, setSearch }) => {
+const AdvancedSearch = ({
+  pokemonData,
+  search,
+  setSearch,
+  typeFilter,
+  setTypeFilter,
+  weaknessFilter,
+  setWeaknessFilter,
+}) => {
   const allTypes = [];
   const allWeaknesses = [];
 
@@ -30,40 +38,39 @@ const AdvancedSearch = ({ pokemonData, search, setSearch }) => {
   getAllWeaknesses();
 
   return (
-    <Card id='search' className='text-black w-100 px-3 pb-3 fs-5'>
+    <Card id='search' className='text-black w-100 mx-auto px-3 pb-3 fs-5'>
+      <h4 className='mt-3 text-center'>Advanced Search Options</h4>
+
       <Row>
-        <Col className='pt-3'>
-          <Form.Label>Name</Form.Label>
+        <Col>
           <Form.Control
             type='text'
-            placeholder='Start typing...'
+            placeholder='Search by name...'
             value={search}
             onChange={(e) => {
               setSearch(e.target.value);
             }}
           />
         </Col>
-      </Row>
-      <Row>
-        <Col className='pt-3'>
-          <Form.Label>Type</Form.Label>
-          {allTypes.sort().map((type, idx) => (
-            <span className='mb-3' key={`type-${type}-${idx}`}>
-              <span className='d-block'>
-                <Form.Check type='checkbox' id={`type-${type}`} label={`${type}`} />
-              </span>
-            </span>
-          ))}
+        <Col>
+          <Form.Select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
+            <option value='all-types'>Select Type</option>
+            {allTypes.sort().map((type, idx) => (
+              <option key={`type-${type}-${idx}`} value={type}>
+                {type}
+              </option>
+            ))}
+          </Form.Select>
         </Col>
-        <Col className='pt-3'>
-          <Form.Label>Weakness</Form.Label>
-          {allWeaknesses.sort().map((weakness, idx) => (
-            <span className='mb-3' key={`weakness-${weakness}-${idx}`}>
-              <span className='d-block'>
-                <Form.Check type='checkbox' id={`weakness-${weakness}`} label={`${weakness}`} />
-              </span>
-            </span>
-          ))}
+        <Col>
+          <Form.Select value={weaknessFilter} onChange={(e) => setWeaknessFilter(e.target.value)}>
+            <option value='all-weaknesses'>Select Weakness</option>
+            {allWeaknesses.sort().map((weakness, idx) => (
+              <option key={`weakness-${weakness}-${idx}`} value={weakness}>
+                {weakness}
+              </option>
+            ))}
+          </Form.Select>
         </Col>
       </Row>
     </Card>

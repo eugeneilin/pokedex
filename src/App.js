@@ -1,12 +1,16 @@
 import React, { useState, useEffect } from 'react';
-import { Container } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 import AdvancedSearch from './components/AdvancedSearch.jsx';
 import PokeDexDisplay from './components/PokeDexDisplay';
 import './global.css';
 
 const App = () => {
   const [pokemonData, setPokemonData] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   const [search, setSearch] = useState('');
+  const [typeFilter, setTypeFilter] = useState('all-types');
+  const [weaknessFilter, setWeaknessFilter] = useState('all-weaknesses');
 
   // Fetching data from API
   const fetchData = async () => {
@@ -18,20 +22,44 @@ const App = () => {
   };
 
   useEffect(() => {
+    setIsLoading(true);
     fetchData();
+    setIsLoading(false);
     // eslint-disable-next-line
   }, []);
+
+  const filteredPokemonData = pokemonData.filter((pokemon) => {
+    const nameMatch = pokemon.name.toLowerCase().startsWith(search.toLowerCase());
+    const typeMatch = typeFilter === 'all-types' || pokemon.type.includes(typeFilter);
+    const weaknessMatch =
+      weaknessFilter === 'all-weaknesses' || pokemon.weaknesses.includes(weaknessFilter);
+    return nameMatch && typeMatch && weaknessMatch;
+  });
 
   return (
     <>
       <Container>
-        <div className='text-center text-uppercase'>
-          <h1 className='my-4 fw-bold text-black'>PokeDex</h1>
-          <p className='mt-2 fs-4'>Advanced Search Options</p>
-        </div>
-        <AdvancedSearch pokemonData={pokemonData} search={search} setSearch={setSearch} />
+        <h1 className='text-center text-uppercase my-4 fw-bold text-black'>PokeDex</h1>
+        <AdvancedSearch
+          pokemonData={pokemonData}
+          search={search}
+          setSearch={setSearch}
+          typeFilter={typeFilter}
+          setTypeFilter={setTypeFilter}
+          weaknessFilter={weaknessFilter}
+          setWeaknessFilter={setWeaknessFilter}
+          filteredPokemonData={filteredPokemonData}
+        />
         <hr />
-        <PokeDexDisplay pokemonData={pokemonData} search={search} />
+        {isLoading ? (
+          <div className='d-flex justify-content-center'>
+            <Spinner animation='border' role='status' variant='light'>
+              <span className='visually-hidden'>Loading...</span>
+            </Spinner>
+          </div>
+        ) : (
+          <PokeDexDisplay filteredPokemonData={filteredPokemonData} />
+        )}
       </Container>
     </>
   );

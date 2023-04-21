@@ -2,19 +2,18 @@ import { Card } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 
 const container = {
-  hidden: { opacity: 1, scale: 0 },
+  hidden: { opacity: 0, scale: 0 },
   visible: {
     opacity: 1,
     scale: 1,
     transition: {
-      delayChildren: 0.3,
+      delayChildren: 1,
       staggerChildren: 0.2,
-      duration: 0.5,
     },
   },
 };
 
-const item = {
+const card = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
@@ -22,18 +21,14 @@ const item = {
   },
 };
 
-const PokeDexDisplay = ({ pokemonData, search }) => {
-  const filteredPokemonData = pokemonData.filter((pokemon) =>
-    pokemon.name.toLowerCase().startsWith(search.toLowerCase())
-  );
-
+const PokeDexDisplay = ({ filteredPokemonData }) => {
   return (
-    <motion.ul className='container row' variants={container} initial='hidden' animate='visible'>
-      {filteredPokemonData.map((pokemon) => (
-        <motion.li
-          key={pokemon.id}
-          className='col-xs-12 col-sm-6 col-md-4 col-lg-3 item'
-          variants={item}
+    <motion.div className='row' variants={container} initial='hidden' animate='visible'>
+      {filteredPokemonData.map((pokemon, idx) => (
+        <motion.div
+          key={pokemon + idx}
+          className='col-xs-12 col-sm-6 col-md-4 col-lg-3'
+          variants={card}
         >
           <Card
             border='light'
@@ -65,9 +60,9 @@ const PokeDexDisplay = ({ pokemonData, search }) => {
               </Card.Text>
             </Card.Body>
           </Card>
-        </motion.li>
+        </motion.div>
       ))}
-    </motion.ul>
+    </motion.div>
   );
 };
 
