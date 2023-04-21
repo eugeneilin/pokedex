@@ -29,7 +29,7 @@ const App = () => {
           <h1 className='my-4 fw-bold text-black'>PokeDex</h1>
           <p className='mt-2 fs-4'>Advanced Search Options</p>
         </div>
-        {/* <AdvancedSearch pokemonData={pokemonData} search={search} setSearch={setSearch} /> */}
+        <AdvancedSearch pokemonData={pokemonData} search={search} setSearch={setSearch} />
         <hr />
         <PokeDexDisplay pokemonData={pokemonData} search={search} />
       </Container>
