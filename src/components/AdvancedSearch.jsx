@@ -7,7 +7,8 @@ const AdvancedSearch = ({ pokemonData, search, setSearch }) => {
 
   function getAllTypes() {
     return pokemonData.map((pokemon) => {
-      pokemon.type.map((t) => {
+      // eslint-disable-next-line
+      return pokemon.type.map((t) => {
         if (!allTypes.includes(t)) {
           return allTypes.push(t);
         }
@@ -18,7 +19,8 @@ const AdvancedSearch = ({ pokemonData, search, setSearch }) => {
 
   function getAllWeaknesses() {
     return pokemonData.map((pokemon) => {
-      pokemon.weaknesses.map((weakness) => {
+      // eslint-disable-next-line
+      return pokemon.weaknesses.map((weakness) => {
         if (!allWeaknesses.includes(weakness)) {
           return allWeaknesses.push(weakness);
         }
