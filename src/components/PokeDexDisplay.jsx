@@ -1,4 +1,26 @@
-import { Card, Row, Col } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
+import { motion } from 'framer-motion';
+
+const container = {
+  hidden: { opacity: 1, scale: 0 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delayChildren: 0.3,
+      staggerChildren: 0.2,
+      duration: 0.5,
+    },
+  },
+};
+
+const item = {
+  hidden: { y: 20, opacity: 0 },
+  visible: {
+    y: 0,
+    opacity: 1,
+  },
+};
 
 const PokeDexDisplay = ({ pokemonData, search }) => {
   const filteredPokemonData = pokemonData.filter((pokemon) =>
@@ -6,9 +28,13 @@ const PokeDexDisplay = ({ pokemonData, search }) => {
   );
 
   return (
-    <Row>
+    <motion.ul className='container row' variants={container} initial='hidden' animate='visible'>
       {filteredPokemonData.map((pokemon) => (
-        <Col key={pokemon.id} xs={12} sm={6} md={4} lg={3}>
+        <motion.li
+          key={pokemon.id}
+          className='col-xs-12 col-sm-6 col-md-4 col-lg-3 item'
+          variants={item}
+        >
           <Card
             border='light'
             className='text-dark mb-3 shadow p-1 bg-body-tertiary border border-2'
@@ -39,9 +65,9 @@ const PokeDexDisplay = ({ pokemonData, search }) => {
               </Card.Text>
             </Card.Body>
           </Card>
-        </Col>
+        </motion.li>
       ))}
-    </Row>
+    </motion.ul>
   );
 };
 

@@ -45,18 +45,18 @@ const AdvancedSearch = ({ pokemonData, search, setSearch }) => {
       <Row>
         <Col className='pt-3'>
           <Form.Label>Type</Form.Label>
-          {allTypes.sort().map((type) => (
-            <span className='mb-3'>
+          {allTypes.sort().map((type, idx) => (
+            <span className='mb-3' key={`type-${type}-${idx}`}>
               <span className='d-block'>
-                <Form.Check type='checkbox' id={`types-${type}`} label={`${type}`} />
+                <Form.Check type='checkbox' id={`type-${type}`} label={`${type}`} />
               </span>
             </span>
           ))}
         </Col>
         <Col className='pt-3'>
           <Form.Label>Weakness</Form.Label>
-          {allWeaknesses.sort().map((weakness) => (
-            <span className='mb-3'>
+          {allWeaknesses.sort().map((weakness, idx) => (
+            <span className='mb-3' key={`weakness-${weakness}-${idx}`}>
               <span className='d-block'>
                 <Form.Check type='checkbox' id={`weakness-${weakness}`} label={`${weakness}`} />
               </span>
