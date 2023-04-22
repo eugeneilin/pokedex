@@ -40,9 +40,8 @@ const AdvancedSearch = ({
   return (
     <Card id='search' className='text-black w-100 mx-auto px-3 pb-3 fs-5'>
       <h4 className='mt-3 text-center'>Advanced Search Options</h4>
-
       <Row>
-        <Col>
+        <Col xs={12} md={4}>
           <Form.Control
             type='text'
             placeholder='Search by name...'
@@ -52,7 +51,7 @@ const AdvancedSearch = ({
             }}
           />
         </Col>
-        <Col>
+        <Col xs={12} md={4}>
           <Form.Select value={typeFilter} onChange={(e) => setTypeFilter(e.target.value)}>
             <option value='all-types'>Select Type</option>
             {allTypes.sort().map((type, idx) => (
@@ -62,7 +61,7 @@ const AdvancedSearch = ({
             ))}
           </Form.Select>
         </Col>
-        <Col>
+        <Col xs={12} md={4}>
           <Form.Select value={weaknessFilter} onChange={(e) => setWeaknessFilter(e.target.value)}>
             <option value='all-weaknesses'>Select Weakness</option>
             {allWeaknesses.sort().map((weakness, idx) => (

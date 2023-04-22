@@ -23,8 +23,7 @@ const App = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    fetchData();
-    setIsLoading(false);
+    fetchData().then(() => setIsLoading(false));
     // eslint-disable-next-line
   }, []);
 
@@ -39,7 +38,7 @@ const App = () => {
   return (
     <>
       <Container>
-        <h1 className='text-center text-uppercase my-4 fw-bold text-black'>PokeDex</h1>
+        <h1 className='text-center text-uppercase my-4 fw-bold'>PokeDex</h1>
         <AdvancedSearch
           pokemonData={pokemonData}
           search={search}
