@@ -35,6 +35,12 @@ const App = () => {
     return nameMatch && typeMatch && weaknessMatch;
   });
 
+  const handleReset = () => {
+    setSearch('');
+    setTypeFilter('all-types');
+    setWeaknessFilter('all-weaknesses');
+  };
+
   return (
     <>
       <Container>
@@ -48,6 +54,7 @@ const App = () => {
           weaknessFilter={weaknessFilter}
           setWeaknessFilter={setWeaknessFilter}
           filteredPokemonData={filteredPokemonData}
+          handleReset={handleReset}
         />
         <hr />
         {isLoading ? (

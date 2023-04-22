@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Form, Row, Col } from 'react-bootstrap';
+import { Card, Form, Row, Col, Button } from 'react-bootstrap';
 
 const AdvancedSearch = ({
   pokemonData,
@@ -9,6 +9,7 @@ const AdvancedSearch = ({
   setTypeFilter,
   weaknessFilter,
   setWeaknessFilter,
+  handleReset,
 }) => {
   const allTypes = [];
   const allWeaknesses = [];
@@ -39,7 +40,7 @@ const AdvancedSearch = ({
 
   return (
     <Card id='search' className='text-black w-100 mx-auto px-3 pb-3 fs-5'>
-      <h4 className='mt-3 text-center'>Advanced Search Options</h4>
+      <h5 className='mt-3 text-center'>Advanced Search Options</h5>
       <Row>
         <Col xs={12} md={4}>
           <Form.Control
@@ -72,6 +73,16 @@ const AdvancedSearch = ({
           </Form.Select>
         </Col>
       </Row>
+      {search !== '' || typeFilter !== 'all-types' || weaknessFilter !== 'all-weaknesses' ? (
+        <Button
+          className='bg-dark mt-3 mb-2 p-2 w-25 mx-auto d-block'
+          onClick={() => {
+            handleReset();
+          }}
+        >
+          Reset
+        </Button>
+      ) : null}
     </Card>
   );
 };
